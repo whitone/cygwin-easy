@@ -1,0 +1,5 @@
+#summary Cygwin Easy wiki main page.
+
+= Cygwin Easy Wiki =
+
+Welcome to the wiki of Cygwin Easy project.
