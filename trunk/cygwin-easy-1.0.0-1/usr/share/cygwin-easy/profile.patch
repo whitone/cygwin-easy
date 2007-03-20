@@ -1,0 +1,111 @@
+--- profile.cygwin-easy	2007-02-20 14:57:12.000000000 +0100
++++ profile		2007-03-02 01:36:33.328125000 +0100
+@@ -49,18 +49,19 @@
+ 
+ # If the home directory doesn't exist, create it.
+ if [ ! -d "${HOME}" ]; then
+-	mkdir -p "${HOME}"
+-	echo "Copying skeleton files."
+-	echo "These files are for the user to personalise"
+-	echo "their cygwin experience."
+-	echo
+-	echo "These will never be overwritten."
+-	echo
++	mkdir -p "${HOME}" &> /dev/null
++	# echo "Copying skeleton files."
++	# echo "These files are for the user to personalise"
++	# echo "their cygwin experience."
++	# echo
++	# echo "These will never be overwritten."
++	# echo
+ 	cd /etc/skel
+ 	/bin/find . -type f | while read f; do
+ 		fDest=`echo ${f} | sed -e 's/^\.//g'`
+ 		if [ ! -e "${HOME}${fDest}" -a ! -L "${HOME}${fDest}" ]; then
+-			/usr/bin/install -D -p -v "${f}" "${HOME}/${fDest}"
++			/usr/bin/install -D -p -v "${f}" "${HOME}/${fDest}" &> /dev/null
++			attrib +H "$(cygpath -w "$HOME")\\${fDest}" &> /dev/null
+ 		fi
+ 	done
+ fi
+@@ -176,41 +177,41 @@ fi
+ #   about this on the lists!
+ # If this message keeps appearing and you are sure it's a mistake (ie, don't
+ #   email about it!), comment out the test below.
+-case `id -ng` in
+-mkpasswd )
+-  echo "Your group is currently \"mkpasswd\".  This indicates that"
+-  echo "the /etc/passwd (and possibly /etc/group) files should be rebuilt."
+-  echo "See the man pages for mkpasswd and mkgroup then, for example, run"
+-  echo "mkpasswd -l [-d] > /etc/passwd"
+-  echo "mkgroup  -l [-d] > /etc/group"
+-  echo "Note that the -d switch is necessary for domain users."
+-  ;;
+-
+-mkgroup )
+-  echo "Your group is currently \"mkgroup\".  This indicates that"
+-  echo "the /etc/group (and possibly /etc/passwd) files should be rebuilt."
+-  echo "See the man pages for mkpasswd and mkgroup then, for example, run"
+-  echo "mkpasswd -l [-d] > /etc/passwd"
+-  echo "mkgroup  -l [-d] > /etc/group"
+-  echo "Note that the -d switch is necessary for domain users."
+-  ;;
+-
+-mkgroup_l_d )
+-  echo "Your group name is currently \"mkgroup_l_d\". This indicates that not"
+-  echo "all domain users and groups are listed in the /etc/passwd and"
+-  echo "/etc/group files."
+-  echo "See the man pages for mkpasswd and mkgroup then, for example, run"
+-  echo "mkpasswd -l -d > /etc/passwd"
+-  echo "mkgroup  -l -d > /etc/group"
+-  echo
+-  echo "This message is only displayed once (unless you recreate /etc/group)"
+-  echo "and can be safely ignored."
+-
+-  # only display the above once
+-  cp -f /etc/group "${HOME}/group.mkgroup_l_d" \
+-  && ( [ -w /etc/group ] || chmod --silent a+w /etc/group ; )\
+-  && sed -e 's/^mkgroup_l_d/mkgroup-l-d/' "${HOME}/group.mkgroup_l_d" > /etc/group \
+-  && chmod --silent --reference=/etc/passwd /etc/group
+-  rm -f "${HOME}/group.mkgroup_l_d"
+-  ;;
+-esac
++# case `id -ng` in
++# mkpasswd )
++#   echo "Your group is currently \"mkpasswd\".  This indicates that"
++#   echo "the /etc/passwd (and possibly /etc/group) files should be rebuilt."
++#   echo "See the man pages for mkpasswd and mkgroup then, for example, run"
++#   echo "mkpasswd -l [-d] > /etc/passwd"
++#   echo "mkgroup  -l [-d] > /etc/group"
++#   echo "Note that the -d switch is necessary for domain users."
++#   ;;
++# 
++# mkgroup )
++#   echo "Your group is currently \"mkgroup\".  This indicates that"
++#   echo "the /etc/group (and possibly /etc/passwd) files should be rebuilt."
++#   echo "See the man pages for mkpasswd and mkgroup then, for example, run"
++#   echo "mkpasswd -l [-d] > /etc/passwd"
++#   echo "mkgroup  -l [-d] > /etc/group"
++#   echo "Note that the -d switch is necessary for domain users."
++#   ;;
++# 
++# mkgroup_l_d )
++#   echo "Your group name is currently \"mkgroup_l_d\". This indicates that not"
++#   echo "all domain users and groups are listed in the /etc/passwd and"
++#   echo "/etc/group files."
++#   echo "See the man pages for mkpasswd and mkgroup then, for example, run"
++#   echo "mkpasswd -l -d > /etc/passwd"
++#   echo "mkgroup  -l -d > /etc/group"
++#   echo
++#   echo "This message is only displayed once (unless you recreate /etc/group)"
++#   echo "and can be safely ignored."
++# 
++#   # only display the above once
++#   cp -f /etc/group "${HOME}/group.mkgroup_l_d" \
++#   && ( [ -w /etc/group ] || chmod --silent a+w /etc/group ; )\
++#   && sed -e 's/^mkgroup_l_d/mkgroup-l-d/' "${HOME}/group.mkgroup_l_d" > /etc/group \
++#   && chmod --silent --reference=/etc/passwd /etc/group
++#   rm -f "${HOME}/group.mkgroup_l_d"
++#   ;;
++# esac;
+\ No newline at end of file
