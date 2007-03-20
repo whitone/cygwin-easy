@@ -1,0 +1,8 @@
+[autorun]
+label=Cygwin Easy
+open=autorun.bat
+icon=cygwin\usr\share\icons\cygwin.ico
+shell\xwin=X Windows
+shell\xwin\command=autorun.bat x
+shell\console=Console
+shell\console\command=console\console.exe
