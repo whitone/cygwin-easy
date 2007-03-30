@@ -157,6 +157,7 @@ del /q "%temp%\umount.log" 2> nul
 %curdrive%\cygwin\bin\mount -bfu %curdrive%/cygwin/lib /usr/lib 2> nul
 %curdrive%\cygwin\bin\mount -bfu "%temp%/tmp" /tmp 2> nul
 %curdrive%\cygwin\bin\mount -bfu "%temp%/var/tmp" /var/tmp 2> nul
+%curdrive%\cygwin\bin\mount -t --change-cygdrive-prefix /cygdrive 2> nul
 %curdrive%\cygwin\bin\bash -c "/usr/share/cygwin-easy/autorun.sh %curdrive%" 2> nul
 goto makebat
 
