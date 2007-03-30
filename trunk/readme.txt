@@ -42,4 +42,4 @@ General information about Cygwin licenses is available at http://www.cygwin.com/
 
 Cygwin Easy requires Microsoft Windows 95/98/ME/2000/XP/Vista or next version.
 
-For any other informations visit the project site: www.cygwineasy.tk.
+For any other informations visit the site of the project: www.cygwineasy.tk.
