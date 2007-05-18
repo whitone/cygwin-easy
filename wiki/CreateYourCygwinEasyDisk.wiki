@@ -15,7 +15,7 @@ http://whitone.googlepages.com/cygwin-easy-1.0.0.png
 
 = Second stage =
 
-Copy *autorun.bat*, *autorun.inf*, *readme.txt* and *license.txt* in the drive *X*. You can try your Cygwin Easy disk with a double click on *autorun.bat*, a console would be appear. If all things are ok, now you can burn your Cygwin Easy disk.
+Copy [http://cygwin-easy.googlecode.com/svn/trunk/autorun.bat autorun.bat], [http://cygwin-easy.googlecode.com/svn/trunk/autorun.inf autorun.inf], [http://cygwin-easy.googlecode.com/svn/trunk/readme.txt readme.txt] and [http://cygwin-easy.googlecode.com/svn/trunk/license.txt license.txt] in the drive *X*. You can try your Cygwin Easy disk with a double click on *autorun.bat*, a console would be appear. If all things are ok, now you can burn your Cygwin Easy disk.
 
 
 
