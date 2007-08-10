@@ -4,6 +4,7 @@ rem autorun.bat - Copyright 2007 Stefano Cotta Ramusino.
 rem ====================================================
 rem Written by Stefano Cotta Ramusino, February 2007.
 rem Modified by Stefano Cotta Ramusino, March 2007.
+rem Modified by Stefano Cotta Ramusino, August 2007.
 rem
 rem Based on X.bat - Copyright 2004 Trustees of Indiana University under 
 rem the GNU General Public License.
@@ -118,16 +119,24 @@ if not "%2"=="" goto homepass
 echo @echo off > "%temp%\lnk\cygwin.bat" 2> nul
 %curdrive%\cygwin\bin\cygpath -D -w | %curdrive%\cygwin\bin\sed "s/^\(.*\)/set home=\1\r/" >> "%temp%\lnk\cygwin.bat" 2> nul
 call "%temp%\lnk\cygwin.bat" 2> nul
-if exist "%home%\cygwineasy.ini" goto myhome
+if exist "%curdrive%\cygwineasy.ini" goto defset
 echo @echo off > "%temp%\lnk\cygwin.bat" 2> nul
 %curdrive%\cygwin\bin\cygpath -D -w | %curdrive%\cygwin\bin\sed "s/^\(.*\)/set home=\1\/cygwin\r/" >> "%temp%\lnk\cygwin.bat" 2> nul
+call "%temp%\lnk\cygwin.bat" 2> nul
+goto startcyg
+
+:defset
+rem Get home directory from main settings file
+rem ------------------------------------------
+echo @echo off > "%temp%\lnk\cygwin.bat" 2> nul
+if exist "%home%\cygwineasy.ini" goto myhome
+type "%curdrive%\cygwineasy.ini" | %curdrive%\cygwin\bin\grep -E ^HOME | %curdrive%\cygwin\bin\sed "s/^\(.*\) */set \1/" >> "%temp%\lnk\cygwin.bat" 2> nul
 call "%temp%\lnk\cygwin.bat" 2> nul
 goto startcyg
 
 :myhome
 rem Get home directory from a settings file
 rem ---------------------------------------
-echo @echo off > "%temp%\lnk\cygwin.bat" 2> nul
 type "%home%\cygwineasy.ini" | %curdrive%\cygwin\bin\grep -E ^HOME | %curdrive%\cygwin\bin\sed "s/^\(.*\) */set \1/" >> "%temp%\lnk\cygwin.bat" 2> nul
 call "%temp%\lnk\cygwin.bat" 2> nul
 goto startcyg
