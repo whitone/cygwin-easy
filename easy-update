@@ -214,11 +214,11 @@ function update_cygeasy()
       else
          echo "not found." 2> /dev/null
       fi
-      if [ "$file" == "autorun.bat" || "$file" == "changelog.txt" ]
+      if [[ "$file" == "autorun.bat" || "$file" == "changelog.txt" ]]
       then
          [ "$new_version" ] || new_version=$(date '+%s' -r $file 2> /dev/null)
          [ "$latest_file" ] || latest_file=$file
-         if [ $new_version -lt $(date '+%s' -r $file 2> /dev/null) ]
+         if [ "$new_version" -lt "$(date '+%s' -r $file 2> /dev/null)" ]
          then
             new_version=$(date '+%s' -r $file 2> /dev/null)
             latest_file=$file
@@ -255,7 +255,7 @@ function update_cygeasy()
       else
          echo "not found." 2> /dev/null
       fi
-      if [ $new_version -lt $(date '+%s' -r $file 2> /dev/null) ]
+      if [ "$new_version" -lt "$(date '+%s' -r $file 2> /dev/null)" ]
       then
          new_version=$(date '+%s' -r $file 2> /dev/null)
          latest_file=$file
@@ -509,7 +509,11 @@ cygeasy_dir=$(mount 2> /dev/null | grep ' / ' 2> /dev/null | cut -f1 -d'\' 2> /d
 [ ! -e "$self_dir" ] &&
    mkdir -p "$self_dir" &> /dev/null
 
-[ -e "$self_dir/autoupdate" ] && rm -f "$self_dir/autoupdate" &> /dev/null
+[ -e "$self_dir/autoupdate" ] && 
+   { 
+     echo -e "Successfully updated to version $cygeasy_version.\n" 2> /dev/null;
+     rm -f "$self_dir/autoupdate" &> /dev/null; 
+   }
 
 nocurl=$(type -f curl &>/dev/null; echo $?)
 online=$(curl -s -o /dev/null http://www.cygwineasy.tk &> /dev/null; echo $?)
