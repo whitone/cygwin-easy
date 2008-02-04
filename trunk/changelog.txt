@@ -1,0 +1,47 @@
+2008.02.04
+----------
+
+* switched to GPL 3
+
+* autorun.bat
+
+  - added "cygdir" variable (now it's possible to change name of the Cygwin installation directory)
+
+  - support for writable device
+
+  - new configuration variable: WRITABLE
+    . 0 -> not writable (like read-only device)
+    . 1 -> writable (like pen drive)
+    . default: auto-detected
+
+  - fixed Windows Vista autoplay bug about "cygpath.exe" crash
+
+  - more places for configuration file "cygwineasy.ini"
+    . Cygwin Easy root directory (when there is "autorun.bat")
+    . desktop
+    . "cygwin" directory on desktop
+    . home directory (set by another configuration file or passed by argument)
+  
+
+* autorun.sh
+
+  - support for writable device
+
+  - better support for Windows 95/98/ME
+
+
+* cygwin-easy.sh
+
+  - optimized relinking process
+
+
+* easy-update
+
+  - new tool to maintain/update Cygwin Easy
+
+
+
+2007.03.21
+----------
+
+* first public release

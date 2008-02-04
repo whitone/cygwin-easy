@@ -1,25 +1,25 @@
 Cygwin Easy
 -----------
 
-Cygwin Easy e' un disco autoavviante che permette facilmente e rapidamente di 
-utilizzare l'ambiente Cygwin su un computer in cui sia presente Windows senza installare 
-nulla sul proprio hard disk.
+Cygwin Easy e' un disco autoavviante che permette facilmente e rapidamente di utilizzare
+l'ambiente Cygwin su un computer in cui sia presente Windows senza installare nulla sul
+proprio hard disk.
 
-Appena viene inserito il disco nel lettore l'autorun dovrebbe avviarsi automaticamente,
-se cio' non avvenisse e' necessario eseguire il file "autorun.bat".
+Appena viene inserito il disco l'autorun dovrebbe avviarsi automaticamente, se cio' non
+avvenisse e' necessario eseguire il file "autorun.bat".
 
 La propria directory di lavoro (home) per Cygwin e' "cygwin", che viene creata sul desktop.
 
 Se sul proprio computer e' gia' presente un'installazione di Cygwin al termine dell'esecuzione
-di "autorun.bat" (uscendo dall'ambiente con il comando exit) oppure cliccando sul collegamento
-di rimozione di Cygwin Easy si ritornera' all'ambiente presente precedentemente.
+di "autorun.bat" (cioe' quando si esce dalla prima shell digitando exit) oppure cliccando sul
+collegamento di rimozione di Cygwin Easy si ritornera' all'ambiente presente precedentemente.
 
 Sul desktop vengono inoltre creati dei collegamenti per eseguire nuove istanze della shell o
-per avviare il server X Windows.
+per avviare il server X Windows, se presente.
 
 Se si vuole avviare il server X Windows appena si inserisce il disco e' sufficiente eseguire
-il comando "D:\autorun X" da Start -> Esegui (dove con "D" si intende la lettera che indica
-il proprio drive ottico).
+il comando "D:\autorun X" dalla casella Cerca del menu' Start oppure da Start -> Esegui (dove
+con "D" si intende la lettera che indica il proprio drive).
 
 Al termine dell'utilizzo di Cygwin Easy sul sistema ospite rimarra' solamente la directory
 di lavoro.
@@ -30,18 +30,22 @@ Se si vuole cambiare la posizione della home e' possibile creare un file di conf
 [Cygwin Easy]
 HOME=C:\home\user
 
-dove "C:\home\user" e' il percorso della propria home.
+dove "C:\home\user" e' il percorso della propria directory di lavoro.
 
-Oppure e' possibile specificarlo come secondo argomento per "autorun.bat", ad esempio:
-"D:\autorun shell C:\home\user" (da Start -> Esegui).
+Oppure e' possibile specificarla come secondo argomento per "autorun.bat", ad esempio:
+"D:\autorun shell C:\home\user" (dalla casella Cerca del menu' Start o da Start -> Esegui).
 
 Se si preferisce una console piu' potente (con ad esempio le schede) e' possibile eseguire
 "console.exe" presente nella directory "console". Console e' un programma open source 
 (http://www.sourceforge.net/projects/console) che e' compatibile con Windows 2000, XP, Vista 
 e successivi.
 
-Una lista completa dei pacchetti forniti con Cygwin Easy e' presente nel file "packages.txt".
-Le licenze dei pacchetti variano ma molti sono sotto la licenza GPL. Gli script di Cygwin Easy
+Una lista completa dei pacchetti forniti e' presente nel file "packages.txt", ma se si vuole
+altro software oppure semplicemente si desidera effettuare l'aggiornamento dell'intero
+ambiente all'ultima versione disponibile si puo' utilizzare il comando "easy-update",
+controllando prima che sia possibile scrivere nel disco dove e' presente Cygwin Easy.
+
+Le licenze dei pacchetti variano, ma molti sono sotto la licenza GPL. Gli script di Cygwin Easy
 sono sotto GPL.
  
 Informazioni sulle licenze di Cygwin sono disponibili su http://www.cygwin.com/licensing.html.
