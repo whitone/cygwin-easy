@@ -139,7 +139,7 @@ function update_myself()
 {
 
    echo -n "Searching for a new version of '$myself' ... " 2> /dev/null
-   curl -L -f -z "$(which $myself 2> /dev/null)" -o "$self_dir/$myself" \
+   curl -L -f -R -z "$(which $myself 2> /dev/null)" -o "$self_dir/$myself" \
       "$cygeasy_download_url/cygwin-easy/usr/bin/$myself" &> /dev/null
    let "retval = $?"
    if [ -e "$self_dir/$myself" ]
@@ -191,7 +191,7 @@ function update_cygeasy()
          [[ "$answer" == "n" || "$answer" == "N" ]] && continue
       fi
       echo -n "Searching for a new version of '$file' ... " 2> /dev/null
-      curl -L -f -z $file -o $self_dir/cache/$file \
+      curl -L -f -R -z $file -o $self_dir/cache/$file \
          $cygeasy_download_url/$file &> /dev/null
       let "retval = $?"
       if [ -e "$self_dir/cache/$file" ]
@@ -232,7 +232,7 @@ function update_cygeasy()
    for file in ${self_files[*]}
    do
       echo -n "Searching for a new version of '$file' ... " 2> /dev/null
-      curl -L -f -z $file -o cache/$file \
+      curl -L -f -R -z $file -o cache/$file \
          $cygeasy_download_url/cygwin-easy/usr/share/cygwin-easy/$file &> /dev/null
       let "retval = $?"
       if [ -e "cache/$file" ]
@@ -316,7 +316,7 @@ function install_console()
          /command="exit"/     {  $0=$1 " ctrl=\"1\" shift=\"0\" alt=\"0\" extended=\"0\" code=\"8\" " $7 }
          /command="switchtab/ {  $0=$1 " ctrl=\"0\" shift=\"0\" alt=\"1\" extended=\"0\" code=\"" code++ "\" " $7 }
          /tab title/          {  gsub("Console2\"","Cygwin Easy\" icon=\"$cygwin_dir\\usr\\share\\icons\\cygwin.ico\"") }
-         /console shell/      {  $0="<console shell=\"\\autorun.bat console\" " $3 }
+         /console shell/      {  gsub("shell=\"\"","shell=\"\\autorun.bat console\"") }
          { print }
       ' $console_full_dir/console.xml | sed "s,\$cygwin_dir,$cygwin_dir,ig" > $console_full_dir/console.xml.cygwin-easy 2> /dev/null
       let "retval = $?"
@@ -351,7 +351,7 @@ function update_tools()
       [ "$setup_url" ] ||
          setup_url="http://cygwin.com/setup/snapshots/?C=M;O=D"
    
-      last_version=$(curl -s -L "$setup_url" 2> /dev/null | \
+      last_version=$(curl -s -L -R "$setup_url" 2> /dev/null | \
          grep -im1 'href="setup-[0-9\.]*\.exe"' 2> /dev/null | \
          sed "s,.*setup-\([0-9\.]*\)\.exe.*,\1,i" 2> /dev/null)
    
@@ -366,7 +366,7 @@ function update_tools()
             [ -e $self_dir/setup.exe ] && setup_exist=1
             cp -f $self_dir/setup.exe $self_dir/setup.exe.backup &> /dev/null
             echo "Download version $last_version" 2> /dev/null
-            curl -L -f -# -o $self_dir/setup.exe \
+            curl -L -f -# -R -o $self_dir/setup.exe \
                $setup_download_url/setup-$last_version.exe > /dev/null
             let "retval = $?"
             case "$retval" in
@@ -425,7 +425,7 @@ function update_tools()
       [ "$console_url" ] ||
          console_url="http://sourceforge.net/export/rss2_projfiles.php?group_id=43764"
 
-      last_version=$(curl -s -L "$console_url" 2> /dev/null | \
+      last_version=$(curl -s -R -L "$console_url" 2> /dev/null | \
          grep -i -m1 "Includes files: Console-" 2> /dev/null | \
          sed -n "s,.*Includes files: Console-\([^ ]*\)\.zip .*,\1,pi" 2> /dev/null)
 
@@ -441,7 +441,7 @@ function update_tools()
             [ -e $self_dir/console.zip ] && console_exist=1
             cp -fa $console_full_dir $self_dir &> /dev/null
             echo "Download version $last_version" 2> /dev/null
-            curl -f -L -# -C - -o $self_dir/console.zip \
+            curl -f -L -R -# -C - -o $self_dir/console.zip \
                $console_download_url/Console-$last_version.zip > /dev/null
             let "retval = $?"
             case "$retval" in
