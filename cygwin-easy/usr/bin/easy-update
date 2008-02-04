@@ -479,6 +479,9 @@ myself=${0##*/}
 [ "$1" == "--help" ] && { show_help 2> /dev/null; exit $?; }
 [ "$1" == "--version" ] && { show_version 2> /dev/null; echo 2> /dev/null; show_copyright 2> /dev/null; exit $?; }
 
+[ "$self_dir" ] ||
+    self_dir=/usr/share/cygwin-easy
+
 [ -e "$self_dir/autoupdate" ] && 
    { 
      echo -e "Successfully updated to version $cygeasy_version.\n" 2> /dev/null;
@@ -498,8 +501,6 @@ myself=${0##*/}
 [ -r /etc/$myself.conf ] &&
    . /etc/$myself.conf &> /dev/null
 
-[ "$self_dir" ] ||
-    self_dir=/usr/share/cygwin-easy
 [ "$self_files" ] ||
     self_files=("autorun.sh" "profile.patch")
 [ "$readme_files" ] || 
